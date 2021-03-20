@@ -34,6 +34,13 @@ void GhostSpawner::spawnGhost(string color){
 
 void GhostSpawner::keyPressed(int key){
     if(key == 'g'){
-        spawnGhost("red");
+        std::vector<string> ghosts  = {"red", "cyan", "pink", "orange"};
+        std::vector<int> assign;
+
+        for(int i = 0; i < ghosts.size(); i++){
+            assign.push_back(ofRandom(0,3));
+            spawnGhost(ghosts[assign[i]]);
+        }
+        
     }
 }
