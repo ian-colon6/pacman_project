@@ -23,6 +23,7 @@ class Player: public Entity{
     public:
         Player(int, int, int , int, EntityManager*);
         ~Player();
+        powerUp();
         int getHealth();
         void setHealth(int);
         int getScore();
