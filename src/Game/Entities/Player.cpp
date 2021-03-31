@@ -203,3 +203,6 @@ Player::~Player(){
     delete walkLeft;
     delete walkRight;
 }
+Player::powerUp(){
+    
+}
