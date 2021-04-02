@@ -1,5 +1,7 @@
 #include "GhostSpawner.h"
 #include "Ghost.h"
+#include "RandomGhost.h"
+#include "Dot.h"
 
 GhostSpawner::GhostSpawner(int x, int y, int width, int height, EntityManager* em, ofImage sprite) : Entity(x, y, width, height){
     this->em = em;
@@ -30,6 +32,8 @@ void GhostSpawner::tick(){
 void GhostSpawner::spawnGhost(string color){
     Ghost* g = new Ghost(x,y,width-2,height-2,sprite,em, color);
     em->ghosts.push_back(g);
+    RandomGhost* r_g = new RandomGhost(x,y, width-2, height-2, sprite, em, color);
+    em->ghosts.push_back(r_g);
 }
 
 void GhostSpawner::keyPressed(int key){

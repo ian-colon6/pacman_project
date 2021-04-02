@@ -3,6 +3,7 @@
 #include "Dot.h"
 #include "BigDot.h"
 #include "Ghost.h"
+#include "RandomGhost.h"
 
 Player::Player(int x, int y, int width, int height, EntityManager* em) : Entity(x, y, width, height){
     spawnX = x;
@@ -178,11 +179,17 @@ void Player::checkCollisions(){
     for(Entity* entity:em->ghosts){
         if(collides(entity)){
             Ghost* ghost = dynamic_cast<Ghost*>(entity);
+            RandomGhost* r_ghost = dynamic_cast<RandomGhost*>(entity);
             if(ghost->getKillable()){
                 ghost->remove = true;
             }else{
                 die();
 
+            }
+            if(r_ghost->getKillable()){
+                r_ghost->remove = true;
+            }else{
+                die();
             }
         }
     }
