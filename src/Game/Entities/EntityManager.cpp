@@ -51,6 +51,12 @@ void EntityManager::tick(){
 void EntityManager::render(){
     for(Entity* entity: entities){
         entity->render();
+        int position = ofRandom(0, entities.size());
+        rand_position = {position};
+        if(entity == dynamic_cast<Dot*>(rand_position[0])){
+            RandomGhost* random_entity = dynamic_cast<RandomGhost*>(entity);
+            random_entity->render();
+        }
     }
     for(BoundBlock* BoundBlock: BoundBlocks){
         BoundBlock->render();

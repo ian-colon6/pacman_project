@@ -1,11 +1,11 @@
 #pragma once
 #include "Ghost.h"
-#include "EntityManager.h"
-#include "Animation.h"
+//#include "EntityManager.h"
+//#include "Animation.h"
 #include "Dot.h"
 
 
-class RandomGhost : public Ghost, public Dot{
+class RandomGhost : public Ghost{
     private:
         
         bool killable = false;
