@@ -1,7 +1,7 @@
 #pragma once
 #include "Ghost.h"
-//#include "EntityManager.h"
-//#include "Animation.h"
+#include "EntityManager.h"
+#include "Animation.h"
 #include "Dot.h"
 
 

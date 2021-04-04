@@ -53,25 +53,27 @@ void EntityManager::render(){
     for(Entity* entity: entities){
         entity->render();
         Player* player1 = dynamic_cast<Player*>(entity);
-        RandomGhost* random_entity = dynamic_cast<RandomGhost*>(entity);
+        
         
         for(int i = 0; i < entities.size(); i++){
 
             Entity* position = entities[ofRandom(0, i)];
 
-            if(dynamic_cast<Dot*>(position)){
+            if(dynamic_cast<Dot*>(position) && dynamic_cast<Player*>(entity)){
                 
-                rand_position.push_back(position);
-                break;
+                if(player1->getScore() == 500 && position->getX() > player1->getX() + 10 && position->getY() > player1->getY() + 10){
+
+                    rand_position.push_back(position);
+                    RandomGhost* random_entity = dynamic_cast<RandomGhost*>(rand_position[0]);
+                    random_entity->render();
+                    break;
+                }
+                
             }
             else{
                 continue;
             }
 
-        }
-
-        if(player1->getScore() >= 500){
-            random_entity->render();
         }
     }
     for(BoundBlock* BoundBlock: BoundBlocks){
