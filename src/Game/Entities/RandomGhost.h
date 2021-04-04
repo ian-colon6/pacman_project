@@ -19,7 +19,7 @@ class RandomGhost : public Ghost{
 
     public:
 
-        RandomGhost(int x, int y, int width, int height, ofImage spriteSheet, EntityManager* em, string color);
+        RandomGhost(int, int, int, int, ofImage, EntityManager*, string);
         ~RandomGhost();
         void tick();
         void render();

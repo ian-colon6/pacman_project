@@ -3,8 +3,8 @@
 #include "BoundBlock.h"
 #include "Player.h"
 
-RandomGhost::RandomGhost(int x, int y, int width, int height, ofImage spriteSheet, EntityManager* em, string color) : Ghost(int x, int y, int width, int height, ofImage spriteSheet, EntityManager* em, string color){
-    /*
+RandomGhost::RandomGhost(int x, int y, int width, int height, ofImage spriteSheet, EntityManager* em, string color) : Ghost(x, y, width, height, spriteSheet, em, color){
+    
     this->em = em;
     vector<ofImage> killableFrames;
     ofImage temp;
@@ -26,7 +26,7 @@ RandomGhost::RandomGhost(int x, int y, int width, int height, ofImage spriteShee
     }else if(color=="orange"){
         sprite.cropFrom(spriteSheet,456,113,16,16);
     }
-    */
+    
 }
 
 void RandomGhost::tick(){
@@ -66,10 +66,10 @@ void RandomGhost::tick(){
 }
 
 void RandomGhost::render(){
-    if(killable == true && Player::getScore() == 500){
+    if(killable == true){
         killableAnim->getCurrentFrame().draw(x,y,width,height);
     }
-    else if(Player::getScore() == 500){
+    else{
         Entity::render();
     }
 }

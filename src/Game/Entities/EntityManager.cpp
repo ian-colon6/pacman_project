@@ -1,6 +1,7 @@
 #include "EntityManager.h"
 #include "Ghost.h"
 #include "RandomGhost.h"
+#include "Player.h"
 void EntityManager::tick(){
     if(killable){
         killableCounter--;
@@ -51,10 +52,25 @@ void EntityManager::tick(){
 void EntityManager::render(){
     for(Entity* entity: entities){
         entity->render();
-        int position = ofRandom(0, entities.size());
-        rand_position = {position};
-        if(entity == dynamic_cast<Dot*>(rand_position[0])){
-            RandomGhost* random_entity = dynamic_cast<RandomGhost*>(entity);
+        Player* player1 = dynamic_cast<Player*>(entity);
+        RandomGhost* random_entity = dynamic_cast<RandomGhost*>(entity);
+        
+        for(int i = 0; i < entities.size(); i++){
+
+            Entity* position = entities[ofRandom(0, i)];
+
+            if(dynamic_cast<Dot*>(position)){
+                
+                rand_position.push_back(position);
+                break;
+            }
+            else{
+                continue;
+            }
+
+        }
+
+        if(player1->getScore() >= 500){
             random_entity->render();
         }
     }
