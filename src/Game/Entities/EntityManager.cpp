@@ -10,10 +10,11 @@ void EntityManager::tick(){
             for(Entity* entity:ghosts){
                 Ghost* ghost = dynamic_cast<Ghost*>(entity); 
                 ghost->setKillable(false);
-            }
-            for(Entity* ran_entity : random_ghost){
-                RandomGhost* r_ghost = dynamic_cast<RandomGhost*>(ran_entity);
-                r_ghost->setKillable(false);
+
+                if(dynamic_cast<RandomGhost*>(entity)){
+                    RandomGhost* r_ghost = dynamic_cast<RandomGhost*>(entity);
+                    r_ghost->setKillable(false);
+                }
             }
         }
     }
@@ -44,22 +45,9 @@ void EntityManager::tick(){
             toRemove.push_back(i);
         }
     }
-    for(int j = 0; j < random_ghost.size(); j++){
-        if(!random_ghost[j]->remove){
-            random_ghost[j]->tick();
-
-        }else{
-            toRemove.push_back(j);
-        }
-    }
     for(unsigned int removable: toRemove){
         Ghost* entityPointer = dynamic_cast<Ghost*>(*(ghosts.begin() + removable));
         ghosts.erase(ghosts.begin() + removable);
-        delete entityPointer;
-    }
-    for(unsigned int removable: toRemove){
-        RandomGhost* entityPointer = dynamic_cast<RandomGhost*>(*(random_ghost.begin() + removable));
-        random_ghost.erase(random_ghost.begin() + removable);
         delete entityPointer;
     }
 }
@@ -86,10 +74,11 @@ void EntityManager::setKillable(bool k){
     for(Entity* entity:ghosts){
         Ghost* ghost = dynamic_cast<Ghost*>(entity); 
         ghost->setKillable(true);
-    }
-    for(Entity* entity : random_ghost){
-        RandomGhost* r_ghost = dynamic_cast<RandomGhost*>(entity);
-        r_ghost->setKillable(true);
+    
+        if(dynamic_cast<RandomGhost*>(entity)){
+            RandomGhost* r_ghost = dynamic_cast<RandomGhost*>(entity);
+            r_ghost->setKillable(true);
+        }
     }
 }
 
@@ -102,15 +91,14 @@ EntityManager::~EntityManager(){
         Ghost* ghostPointer = dynamic_cast<Ghost*>(e);
         delete e;
     }
-    for(Entity* e : random_ghost){
-        RandomGhost* r_ghost_ptr = dynamic_cast<RandomGhost*>(e);
-        delete e;
-    }
     for(Entity* e: entities){
         delete e;
     }
     BoundBlocks.clear();
     ghosts.clear();
     entities.clear();
-    random_ghost.clear();
+}
+
+vector<Entity*> EntityManager::getEnts(){
+    return entities;
 }

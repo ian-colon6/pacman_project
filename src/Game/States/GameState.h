@@ -14,6 +14,9 @@ class GameState: public State{
 		void mousePressed(int x, int y, int button);
 		void keyReleased(int key);
 		int getFinalScore();
+		void RandomGhostSpawn();
+		bool rGhost_detector = false;
+		int score = 0;
 	
 	private:
 		ofSoundPlayer music;

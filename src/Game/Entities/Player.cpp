@@ -19,22 +19,27 @@ Player::Player(int x, int y, int width, int height, EntityManager* em) : Entity(
     vector<ofImage> leftAnimframes;
     vector<ofImage> rightAnimframes;
     ofImage temp;
+
     for(int i=0; i<3; i++){
         temp.cropFrom(sprite, i*16, 48, 16, 16);
         downAnimframes.push_back(temp);
     }
+
     for(int i=0; i<3; i++){
         temp.cropFrom(sprite, i*16, 32, 16, 16);
         upAnimframes.push_back(temp);
     }
+
     for(int i=0; i<3; i++){
         temp.cropFrom(sprite, i*16, 16, 16, 16);
         leftAnimframes.push_back(temp);
     }
+
     for(int i=0; i<3; i++){
         temp.cropFrom(sprite, i*16, 0, 16, 16);
         rightAnimframes.push_back(temp);
     }
+
     walkDown = new Animation(1,downAnimframes);
     walkUp = new Animation(1,upAnimframes);
     walkLeft = new Animation(1,leftAnimframes);
@@ -178,24 +183,26 @@ void Player::checkCollisions(){
     }
     for(Entity* entity:em->ghosts){
         if(collides(entity)){
+
             Ghost* ghost = dynamic_cast<Ghost*>(entity);
             if(ghost->getKillable()){
+
+                if(dynamic_cast<RandomGhost*>(entity)){
+                    em->num_of_random = 0;
+                }
+                if(em->num_of_random != 0){
+                    if(dynamic_cast<Ghost*>(entity)){
+                        em->normal_ghosts--;
+                    }
+                }
+                
                 ghost->remove = true;
             }else{
                 die();
 
             }
         }
-    }
-    for(Entity* random_ent : em->random_ghost){
-        if(collides(random_ent)){
-            RandomGhost* r_ghost = dynamic_cast<RandomGhost*>(random_ent);
-            if(r_ghost->getKillable()){
-                r_ghost->remove = true;
-            }else{
-                die();
-            }
-        }
+    
     }
 
     

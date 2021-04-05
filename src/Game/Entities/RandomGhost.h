@@ -11,7 +11,7 @@ class RandomGhost : public Ghost{
         bool killable = false;
         FACING facing = UP;
         bool canMove = true;
-        bool justSpawned = false;
+        bool justSpawned = true;
         void checkCollisions();
         int speed = 3;
         EntityManager* EM;
@@ -25,4 +25,8 @@ class RandomGhost : public Ghost{
         void render();
         bool getKillable();
         void setKillable(bool);
+        void RandomSpawn(int, int, string);
+        void RandomGhostSpawn();
+        void RGhostRespawn();
+        bool isAlive = true;
 };

@@ -1,5 +1,6 @@
 #include "GameState.h"
 #include "Entity.h"
+#include "RandomGhost.h"
 
 GameState::GameState() {
 	music.load("music/pacman_chomp.wav");
@@ -18,6 +19,10 @@ void GameState::tick() {
 		finalScore = map->getPlayer()->getScore();
 		map->getPlayer()->setScore(0);
 	}
+
+
+	score = map->getPlayer()->getScore();
+	map->getGhostSpawner()->player_score = score;
 }
 void GameState::render() {
 	map->render();

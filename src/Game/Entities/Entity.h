@@ -18,6 +18,7 @@ class Entity {
 		virtual void tick();
 		virtual void render();
 		bool remove = false;
+		bool isAlive = true;
 		void damage(Entity* damageSource);
 		bool collides(Entity* entity);
 		ofRectangle getBounds();
