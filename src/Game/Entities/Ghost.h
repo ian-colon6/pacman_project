@@ -6,10 +6,10 @@ class Ghost: public Entity{
     public:
         Ghost(int, int, int, int, ofImage, EntityManager*, string);
         ~Ghost();
-        void tick();
-        void render();
-        bool getKillable();
-        void setKillable(bool);
+        virtual void tick();
+        virtual void render();
+        virtual bool getKillable();
+        virtual void setKillable(bool);
     private:
         bool killable = false;
         FACING facing = UP;
