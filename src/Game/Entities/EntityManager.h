@@ -9,7 +9,7 @@ public:
 	std::vector<Entity*> entities;
 	std::vector<BoundBlock*> BoundBlocks;
 	std::vector<Entity*> ghosts;
-	std::vector<Entity*> rand_position;
+	std::vector<Entity*> random_ghost;
 	void tick();
 	void render();
 	void setKillable(bool);

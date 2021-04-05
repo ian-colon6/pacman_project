@@ -3,9 +3,9 @@
 #include "BoundBlock.h"
 #include "Player.h"
 
-RandomGhost::RandomGhost(int x, int y, int width, int height, ofImage spriteSheet, EntityManager* em, string color) : Ghost(x, y, width, height, spriteSheet, em, color){
+RandomGhost::RandomGhost(int x, int y, int width, int height, ofImage spriteSheet, EntityManager* EM, string color) : Ghost(x, y, width, height, spriteSheet, EM, color){
     
-    this->em = em;
+    this->EM = EM;
     vector<ofImage> killableFrames;
     ofImage temp;
     temp.cropFrom(spriteSheet, 584, 64, 16, 16);
@@ -66,8 +66,9 @@ void RandomGhost::tick(){
 }
 
 void RandomGhost::render(){
-    if(killable == true){
-        killableAnim->getCurrentFrame().draw(x,y,width,height);
+    this->justSpawned = true;
+    if(killable){
+        killableAnim->getCurrentFrame().draw(this->getX(), this->getY(), width, height);
     }
     else{
         Entity::render();
@@ -81,7 +82,7 @@ void RandomGhost::setKillable(bool k){
     killable = k;
 }
 void RandomGhost::checkCollisions(){
-    for(BoundBlock* BoundBlock: em->BoundBlocks){
+    for(BoundBlock* BoundBlock: EM->BoundBlocks){
         switch(facing){
             case UP:
                 if(this->getBounds(x, y-speed).intersects(BoundBlock->getBounds())){

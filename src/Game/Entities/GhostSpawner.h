@@ -6,6 +6,7 @@ class GhostSpawner: public Entity{
     public:
         GhostSpawner(int, int, int , int, EntityManager*, ofImage);
         void spawnGhost(string);
+        void RandomSpawner(string);
         void keyPressed(int);
         void tick();
     private:

@@ -12,6 +12,10 @@ GhostSpawner::GhostSpawner(int x, int y, int width, int height, EntityManager* e
     spawnGhost("cyan");
     spawnGhost("orange");
 
+    std::vector<string> random_color = {"red", "pink", "cyan", "orange"};
+    int position_color = ofRandom(4);
+    RandomSpawner(random_color[position_color]);
+
 }
 
 void GhostSpawner::tick(){
@@ -29,12 +33,18 @@ void GhostSpawner::tick(){
             spawnCounter--;
         }
     }
+    if(em->random_ghost.size() < 1){
+        RandomSpawner(colors[ofRandom(4)]);
+    }
 }
 void GhostSpawner::spawnGhost(string color){
     Ghost* g = new Ghost(x,y,width-2,height-2,sprite,em, color);
     em->ghosts.push_back(g);
+}
+
+void GhostSpawner::RandomSpawner(string color){
     RandomGhost* r_g = new RandomGhost(x,y,width-2, height-2, sprite, em, color);
-    em->ghosts.push_back(r_g);
+    em->random_ghost.push_back(r_g);
 }
 
 void GhostSpawner::keyPressed(int key){

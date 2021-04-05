@@ -179,13 +179,17 @@ void Player::checkCollisions(){
     for(Entity* entity:em->ghosts){
         if(collides(entity)){
             Ghost* ghost = dynamic_cast<Ghost*>(entity);
-            RandomGhost* r_ghost = dynamic_cast<RandomGhost*>(entity);
             if(ghost->getKillable()){
                 ghost->remove = true;
             }else{
                 die();
 
             }
+        }
+    }
+    for(Entity* random_ent : em->random_ghost){
+        if(collides(random_ent)){
+            RandomGhost* r_ghost = dynamic_cast<RandomGhost*>(random_ent);
             if(r_ghost->getKillable()){
                 r_ghost->remove = true;
             }else{

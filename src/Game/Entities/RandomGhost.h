@@ -14,7 +14,7 @@ class RandomGhost : public Ghost{
         bool justSpawned = false;
         void checkCollisions();
         int speed = 3;
-        EntityManager* em;
+        EntityManager* EM;
         Animation* killableAnim;
 
     public:
