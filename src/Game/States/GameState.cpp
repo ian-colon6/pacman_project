@@ -3,13 +3,22 @@
 #include "RandomGhost.h"
 
 GameState::GameState() {
+	ofSoundSetVolume(0.5);
 	music.load("music/pacman_chomp.wav");
+	ofSoundSetVolume(0.7);
+	persona.load("music/Last_Surprise.wav");
 	mapImage.load("images/map1.png");
 	map = MapBuilder().createMap(mapImage);
 }
 void GameState::tick() {
 	if(!music.isPlaying()){
-			music.play();
+
+		music.play();
+	}
+	if(!persona.isPlaying()){
+		persona.setPaused(false);
+		persona.setLoop(true);
+		persona.play();
 	}
 	map->tick();
 	if(map->getPlayer()->getHealth() == 0){
@@ -29,6 +38,7 @@ void GameState::tick() {
 	else if(getNextState() == "pause"){
 		setNextState("pause");
 		setFinished(true);
+		persona.stop();
 	}
 
 	score = map->getPlayer()->getScore();
@@ -46,11 +56,22 @@ void GameState::keyPressed(int key){
 		map->getPlayer()->setHealth(3);
 		finalScore = map->getPlayer()->getScore();
 		map->getPlayer()->getScore();
+		persona.setPaused(true);
 	}
 	else if(key == 'p'){
 		PAUSE = true;
 		setNextState("pause");
 		setFinished(true);
+		persona.stop();
+	}
+	else if(key == 'r'){
+		//Press r if you want to listen to a different track while on gamestate
+		ofSoundSetVolume(0.7);
+		persona.load("music/Rivers_in_the_Desert.wav");
+	}
+	else if(key == 'l'){
+		ofSoundSetVolume(0.7);
+		persona.load("music/Last_Surprise.wav");
 	}
 }
 

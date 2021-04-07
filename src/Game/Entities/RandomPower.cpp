@@ -1,6 +1,5 @@
 #pragma once
 #include "RandomPower.h"
-//#include "Player.h"
 #include "Dot.h"
 #include "EntityManager.h"
 #include "Entity.h"

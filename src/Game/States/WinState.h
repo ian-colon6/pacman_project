@@ -9,6 +9,7 @@ private:
 	Button *startButton;
 	Animation* anim;
 	int score=0;
+	ofSoundPlayer persona_win;
 public:
 	WinState();
 	~WinState();

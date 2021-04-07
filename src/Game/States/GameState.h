@@ -20,6 +20,7 @@ class GameState: public State{
 	
 	private:
 		ofSoundPlayer music;
+		ofSoundPlayer persona;
 		ofImage mapImage;
 		Map* map;
 		int finalScore=0;
