@@ -46,6 +46,7 @@ Player::Player(int x, int y, int width, int height, EntityManager* em) : Entity(
     walkRight = new Animation(1,rightAnimframes);
 
     this->em = em;
+    random_pwr = new RandomPower(em);
     
 }
 void Player::tick(){
@@ -88,6 +89,8 @@ void Player::render(){
         ofDrawCircle(ofGetWidth()/2 + 25*i +200, 50, 10);
     }
     ofDrawBitmapString("Score:"  + to_string(score), ofGetWidth()/2-200, 50);
+
+    ofDrawBitmapString("Power Ups: " + to_string(em->r_pwr_count), ofGetWidth()/2 - 100, 50);
 }
 
 void Player::keyPressed(int key){
@@ -111,6 +114,15 @@ void Player::keyPressed(int key){
             health++;
             if(health > 3){
                 health--;
+            }
+            break;
+        case 'q':
+            if(em->r_pwr_count >= 1){
+                the_power = random_pwr;
+                the_power->enable();
+                setPosX(em->X);
+                setPosY(em->Y);
+                em->r_pwr_count--;
             }
             break;
     }
@@ -142,6 +154,14 @@ int Player::getScore(){
 
 void Player::setScore(int h){
     score = h;
+}
+
+void Player::setPosX(int random_x){
+    this->x = random_x;
+}
+
+void Player::setPosY(int random_y){
+    this->y = random_y;
 }
 
 void Player::checkCollisions(){
@@ -178,6 +198,7 @@ void Player::checkCollisions(){
             if(dynamic_cast<BigDot*>(entity)){
                 score +=10;
                 em->setKillable(true);
+                em->r_pwr_count++;
             }
         }
     }
@@ -189,6 +210,7 @@ void Player::checkCollisions(){
 
                 if(dynamic_cast<RandomGhost*>(entity)){
                     em->num_of_random = 0;
+                    em->r_pwr_count++;
                 }
                 if(em->num_of_random != 0){
                     if(dynamic_cast<Ghost*>(entity)){
@@ -220,7 +242,4 @@ Player::~Player(){
     delete walkDown;
     delete walkLeft;
     delete walkRight;
-}
-Player::powerUp(){
-    
 }

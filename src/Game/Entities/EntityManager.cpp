@@ -62,9 +62,6 @@ void EntityManager::render(){
     for(Entity* ghost: ghosts){
         ghost->render();
     }
-    for(Entity* random_entity : random_ghost){
-        random_entity->render();
-    }
     
 }
 

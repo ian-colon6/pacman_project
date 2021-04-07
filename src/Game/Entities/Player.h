@@ -1,6 +1,7 @@
 #pragma once
 #include "Animation.h"
-
+#include "PowerUp.h"
+#include "RandomPower.h"
 #include "EntityManager.h"
 
 class Player: public Entity{
@@ -19,6 +20,8 @@ class Player: public Entity{
         Animation *walkLeft;
         Animation *walkRight;
         EntityManager* em;
+        PowerUp* the_power;
+        RandomPower* random_pwr;
 
     public:
         Player(int, int, int , int, EntityManager*);
@@ -28,6 +31,8 @@ class Player: public Entity{
         void setHealth(int);
         int getScore();
         void setScore(int);
+        void setPosX(int);
+        void setPosY(int);
         void tick();
         void render();
         void keyPressed(int);
